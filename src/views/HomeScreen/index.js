@@ -26,6 +26,7 @@ import {
   HStack,
   Stack,
   NativeBaseProvider,
+  Spinner,
 } from "native-base";
 
 const HomeScreen = ({ navigation }) => {
@@ -43,7 +44,6 @@ const HomeScreen = ({ navigation }) => {
     const datos = result.data.results;
     setData(datos);
   };
-
 
   useEffect(() => {
     getApiAll();
@@ -63,17 +63,16 @@ const HomeScreen = ({ navigation }) => {
     //   </Text>
     // </View>
 
-    <Box style={{marginBottom: 20}}>
+    <Box style={{ marginBottom: 20 }}>
       <Box
         maxW="80"
         rounded="lg"
         overflow="hidden"
         borderColor="coolGray.800"
         borderWidth="1"
-      > 
+      >
         <Box>
-          <AspectRatio w="100%" ratio={9 / 9}
-          >
+          <AspectRatio w="100%" ratio={9 / 9}>
             <Image source={{ uri: item?.background_image }} alt="image" />
           </AspectRatio>
           <Center
@@ -87,23 +86,18 @@ const HomeScreen = ({ navigation }) => {
             bottom="0"
             px="3"
             py="1.5"
-            flexDirection={'row'}
+            flexDirection={"row"}
           >
-            {item?.platforms.map(el => el.platform.name).join(' / ')}
+            {item?.platforms.map((el) => el.platform.name).join(" / ")}
           </Center>
         </Box>
-        <Stack p="4" spae={3} >
-          <Stack space={2} >
+        <Stack p="4" spae={3}>
+          <Stack space={2}>
             <Heading size="md" ml="-1">
               {item.name}
             </Heading>
-            <Text
-              fontSize="xs"
-              fontWeight="500"
-              ml="-0.5"
-              mt="-1"
-            >
-              {item.genres.map(el => el.name).join(' / ')}
+            <Text fontSize="xs" fontWeight="500" ml="-0.5" mt="-1">
+              {item.genres.map((el) => el.name).join(" / ")}
             </Text>
           </Stack>
         </Stack>
@@ -132,7 +126,13 @@ const HomeScreen = ({ navigation }) => {
             />
           </View>
         ) : (
-          <ActivityIndicator size={48} />
+          // <ActivityIndicator size={48} />
+          <HStack space={2} justifyContent="center">
+            <Spinner accessibilityLabel="Loading posts" />
+            <Heading color="primary.500" fontSize="md">
+              Loading....
+            </Heading>
+          </HStack>
         )}
       </View>
       <Footer />
