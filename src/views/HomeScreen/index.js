@@ -1,13 +1,8 @@
 import {
   View,
-  // Text,
-  StyleSheet,
   SafeAreaView,
-  TouchableOpacity,
-  Button,
   // Image,
   FlatList,
-  ActivityIndicator,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { styles } from "../../styles";
@@ -25,15 +20,10 @@ import {
   Center,
   HStack,
   Stack,
-  NativeBaseProvider,
   Spinner,
 } from "native-base";
 
 const HomeScreen = ({ navigation }) => {
-  // const [ep, setEp] = useState();
-  // const [data, isLoading, error] = useGet(ep);
-  // if (isLoading) return <Text> Loading... </Text>
-  // if (error) return <Text>Error</Text>
 
   const [data, setData] = useState([]);
 
@@ -129,7 +119,7 @@ const HomeScreen = ({ navigation }) => {
           // <ActivityIndicator size={48} />
           <HStack space={2} justifyContent="center">
             <Spinner accessibilityLabel="Loading posts" />
-            <Heading color="primary.500" fontSize="md">
+            <Heading color="primary.500" fontSize="lg">
               Loading....
             </Heading>
           </HStack>

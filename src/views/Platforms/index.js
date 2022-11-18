@@ -116,11 +116,6 @@ import {
             <ActivityIndicator size={48} />
           )}
         </View>
-        {/* <View style={styles.footer}>
-          <Button title="Bienvenido" onPress={() => getApi()}></Button>
-          <Button title="Prueba" onPress={() => getApiPlatforms()}></Button>
-          <Button title="TodoList" onPress={() => navigation.navigate('TodoList')}></Button>
-        </View> */}
         <Footer />
       </SafeAreaView>
     );

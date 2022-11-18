@@ -12,6 +12,7 @@ import HomeScreen from "../views/HomeScreen";
 import TodoListScreen from "../views/TodoListScreen";
 import RegisterScreen from "../views/RegisterScreen";
 import Platforms from "../views/Platforms";
+// import Footer from "../views/Footer";
 
 const Routes = () => {
   const Stack = createNativeStackNavigator();
@@ -21,7 +22,7 @@ const Routes = () => {
       <NativeBaseProvider>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName="LoginScreen"
             screenOptions={{
               headerShown: false,
             }}
