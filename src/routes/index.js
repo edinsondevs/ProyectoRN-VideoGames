@@ -10,7 +10,7 @@ import LoginScreen from "../views/LoginScreen";
 import Footer from "../views/Footer";
 import HomeScreen from "../views/HomeScreen";
 import TodoListScreen from "../views/TodoListScreen";
-import RegisterScreen from "../views/RegisterScreen";
+import Search from "../views/Search/index.js";
 import Platforms from "../views/Platforms";
 // import Footer from "../views/Footer";
 
@@ -22,7 +22,7 @@ const Routes = () => {
       <NativeBaseProvider>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="LoginScreen"
+            initialRouteName="HomeScreen"
             screenOptions={{
               headerShown: false,
             }}
@@ -48,9 +48,9 @@ const Routes = () => {
               title="Platforms"
             />
             <Stack.Screen
-              name="RegisterScreen"
-              component={RegisterScreen}
-              title="Register"
+              name="Search"
+              component={Search}
+              title="Search"
             />
             <Stack.Screen name="Footer" component={Footer} title="Footer" />
           </Stack.Navigator>

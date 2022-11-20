@@ -15,13 +15,13 @@ const Footer = () => {
 
   const onNavigateValue = (value) => {
     if(value === 'Login') navigation.navigate('Login')
-    if(value === 'Platforms') navigation.navigate('Platforms');
+    // if(value === 'Platforms') navigation.navigate('Platforms');
     if(value === 'HomeScreen') navigation.navigate('HomeScreen');
-    if(value === 'Footer') navigation.navigate('Footer');
+    if(value === 'Search') navigation.navigate('Search');
     
   }
   return (
-    <View>
+    <View style={{alignItems: 'center'  }}>
       <ScrollView>
 
     <SegmentedButtons
@@ -34,16 +34,16 @@ const Footer = () => {
       },
       {
         value: 'HomeScreen',
-        label: 'HomeScreen',
+        label: 'All Games',
         icon: { uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400' }
       },
+      // {
+      //    value: 'Platforms',
+      //    label: 'Platforms',
+      //  },
       {
-         value: 'Platforms',
-         label: 'Platforms',
-       },
-      {
-         value: 'Footer',
-         label: 'Footer',
+         value: 'Search',
+         label: 'Search',
        },
      ]}
      />

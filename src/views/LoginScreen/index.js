@@ -1,10 +1,8 @@
 import { React, useState } from "react";
 import { styles } from "../../styles";
 import {
-  Box, IconButton, CloseIcon,
-  Text,
+  Box, 
   Heading,
-  HStack,
   VStack,
   FormControl,
   Link,
@@ -18,18 +16,14 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithRedirect 
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../database/config";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = ({ navigation }) => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  const provider = new GoogleAuthProvider();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,11 +48,10 @@ const LoginScreen = ({ navigation }) => {
     })
   };
 
-const loginGoogle = () => {
-
-  Alert.alert('Falta esta parte de Google')
+const loginGoogle = () => {  
+  // Alert.alert('Falta esta parte de Google')
   
-  // signInWithPopup(auth, email)
+  // signInWithPopup(auth, provider)
   // .then((result) => {
   //   // This gives you a Google Access Token. You can use it to access the Google API.
   //   const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -83,16 +76,6 @@ const loginGoogle = () => {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(
-            "*******************************************************************************"
-          );
-          console.log(
-            "                            User Created .................!"
-          );
-          console.log(
-            "*******************************************************************************"
-          );
-          // console.log(JSON.stringify(user));
           Alert.alert('User Created Success');
           navigation.navigate("HomeScreen");
         })
@@ -132,23 +115,11 @@ const loginGoogle = () => {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
-          // console.clear("Sign User.................!");
-          // console.clear(" ");
-          console.log(
-            "*******************************************************************************"
-          );
-          console.log(
-            "                            Sign User.................!"
-          );
-          console.log(
-            "*******************************************************************************"
-          );
-          // console.log(user)
           navigation.navigate("HomeScreen");
         })
         .catch((error) => {
-          // Alert.alert(error.message);
-          console.log('error sign in');
+          Alert.alert('Error Sign In');
+          // console.log('error sign in');
         });
     }
     setEmail("");
@@ -156,21 +127,14 @@ const loginGoogle = () => {
   };
 
   const validate = () => {
-    if (email.trim().length <= 0) {
+    if (email.trim().length <= 0 || !email.includes('@') || !email.includes('.')) {
       setErrors("Email is required");
-
-      // Alert.alert("Email is required");
+      Alert.alert("Invalid Email","Please enter a valid email address.");
       return false;
     }
-    if (password.trim().length <= 8) {
+    if (password.trim().length <= 6) {
       setErrors("Password is too short");
-      <HStack flexShrink={1} space={2} alignItems="center">
-      <Alert.Icon />
-      <Text fontSize="md" fontWeight="medium" color="coolGray.800">
-        We are going live in July!
-      </Text>
-    </HStack>
-      // Alert.alert("Password is too");
+      Alert.alert("Password is too","Please enter a valid password longer than 6 characters.");
       return false;
     }
     return true;
@@ -239,9 +203,9 @@ const loginGoogle = () => {
           <Button mt="2" colorScheme="green" onPress={createUser}>
             Sign Up
           </Button>
-          <Button mt="2" colorScheme="green" onPress={loginGoogle}>
+          {/* <Button mt="2" colorScheme="green" onPress={loginGoogle}>
             Google
-          </Button>
+          </Button> */}
         </VStack>
       </Box>
     </Center>
