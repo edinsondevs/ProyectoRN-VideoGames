@@ -1,8 +1,6 @@
 import {
   View,
-  Text,
   ScrollView,
-  TouchableHighlight,
 } from "react-native";
 import React from "react";
 import { styles } from "../../styles";
@@ -11,23 +9,21 @@ import { SegmentedButtons, BottomNavigation } from 'react-native-paper';
 
 
 const Footer = () => {
+
   const navigation = useNavigation();
   const [value, setValue] = React.useState('');
 
   const onNavigateValue = (value) => {
     if(value === 'Login') navigation.navigate('Login')
-    if(value === 'Platforms') navigation.navigate('Platforms');
+    // if(value === 'Platforms') navigation.navigate('Platforms');
     if(value === 'HomeScreen') navigation.navigate('HomeScreen');
+    if(value === 'Search') navigation.navigate('Search');
     
   }
   return (
-    <View>
+    <View style={{alignItems: 'center'  }}>
       <ScrollView>
-    {/* //   <BottomNavigation
-    //   navigationState={{ index, routes }}
-    //   onIndexChange={setIndex}
-    //   renderScene={renderScene}
-    // /> */}
+
     <SegmentedButtons
      value={value}
      onValueChange={onNavigateValue}
@@ -38,29 +34,19 @@ const Footer = () => {
       },
       {
         value: 'HomeScreen',
-        label: 'HomeScreen',
+        label: 'All Games',
+        icon: { uri: 'https://avatars0.githubusercontent.com/u/17571969?v=3&s=400' }
       },
+      // {
+      //    value: 'Platforms',
+      //    label: 'Platforms',
+      //  },
       {
-         value: 'Platforms',
-         label: 'Platforms',
+         value: 'Search',
+         label: 'Search',
        },
      ]}
      />
-     {/* <Text>{value}</Text>
-        <View style={styles.footer}>
-          <TouchableHighlight
-            style={styles.bottomButtons}
-            onPress={() => navigation.navigate("HomeScreen")}
-          >
-            <Text style={styles.footerText}>All Gamers</Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.bottomButtons}
-            onPress={() => navigation.navigate('Platforms')}
-          >
-            <Text style={styles.footerText}>Platforms</Text>
-          </TouchableHighlight>
-        </View>  */}
       </ScrollView>
     </View>
   );

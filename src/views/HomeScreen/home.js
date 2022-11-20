@@ -1,10 +1,7 @@
 import {
     View,
     Text,
-    StyleSheet,
     SafeAreaView,
-    TouchableOpacity,
-    Button,
     Image,
     FlatList,
     ActivityIndicator,
@@ -12,13 +9,9 @@ import {
   import React, { useEffect, useState } from "react";
   import { styles } from "../../styles";
   import { Ionicons } from "@expo/vector-icons";
-  import { useGet } from "../../Hooks";
   import axios from "axios";
   import Footer from "../Footer";
-  import { getApiAll } from "../../Functions";
 
-  
-  
   
   const Home = ({navigation}) => {
     const [ep, setEp] = useState();

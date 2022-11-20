@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
     // backgroundColor: "#fffbfb",
     // background_image: url('../Images/Fondo_Games.jpg'),
     // backgroundColor: "#df9e9e",
@@ -22,9 +22,15 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
   },
   title: {
-    fontSize: 45,
+    fontSize: 20,
     fontWeight: "bold",
-    color: "#383737ea",
+    paddingBottom: 15,
+    color: "#fff",
+    marginStart: 20,
+  },
+
+  titulo: {
+    fontSize: 20,
   },
   viewFormLogin: {
     paddingTop: 20,
@@ -34,7 +40,6 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     alignItems: "center",
-    // backgroundColor: '#f5f5f5',
     borderRadius: 20,
     borderWidth: 2,
     borderColor: "#e6e1e1",
@@ -86,26 +91,17 @@ export const styles = StyleSheet.create({
     paddingBottom: 40,
   },
 
-  // footer2: {
-  //     backgroundColor: '#fff'
-  // },
-
   mainviewStyle: {
     flex: 1,
     flexDirection: "column",
   },
   footer: {
-    // position: 'absolute',
-    // flex:0.1,
-    // left: 0,
-    // right: 0,
     bottom: -10,
     backgroundColor: "black",
     flexDirection: "row",
     height: 80,
     alignItems: "center",
     justifyContent: "space-around",
-    // alignContent: 'space-around'
   },
   bottomButtons: {
     alignItems: "center",
@@ -132,20 +128,19 @@ export const styles = StyleSheet.create({
     marginTop: 30,
     height: 50,
     alignItems: "flex-end",
-    justifyContent: "center",
+    justifyContent: "space-between",
     paddingRight: 20,
+    flexDirection: "row",
   },
 
   content: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "black",
+    paddingTop: 10,
 },
 
 item: {
-  // flex: 1,
-  // flexDirection: "column",
   backgroundColor: '#1d1e1f',
   alignItems: "center",
   padding: 20,
