@@ -22,6 +22,7 @@ import {
   Stack,
   Spinner,
 } from "native-base";
+import { ActivityIndicator } from "react-native-paper";
 
 const HomeScreen = ({ navigation }) => {
 
@@ -116,13 +117,13 @@ const HomeScreen = ({ navigation }) => {
             />
           </View>
         ) : (
-          // <ActivityIndicator size={48} />
-          <HStack space={2} justifyContent="center">
-            <Spinner accessibilityLabel="Loading posts" />
-            <Heading color="primary.500" fontSize="lg">
-              Loading....
-            </Heading>
-          </HStack>
+          <ActivityIndicator size={48} />
+          // <HStack space={2} justifyContent="center">
+          //   <Spinner accessibilityLabel="Loading posts" />
+          //   <Heading color="primary.500" fontSize="lg">
+          //     Loading....
+          //   </Heading>
+          // </HStack>
         )}
       </View>
       <Footer />
