@@ -1,18 +1,13 @@
 import {
   View,
-  SafeAreaView,
-  Alert,
   Pressable,
   FlatList,
-  Modal,
-  Button,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { styles } from "../../styles";
 import { Ionicons } from "@expo/vector-icons";
 import axios from "axios";
 import Footer from "../Footer";
-// import { API } from "../../API";
 import {
   Box,
   Heading,
@@ -24,8 +19,7 @@ import {
   Stack,
   Spinner,
 } from "native-base";
-import { ActivityIndicator } from "react-native-paper";
-import Details from "../Details";
+
 
 const HomeScreen = ({ navigation }) => {
   const [data, setData] = useState([]);
@@ -44,9 +38,6 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   const openModal = (details) => {
-    setOpen(true);
-    // console.log(details);
-    // Alert.alert(`estoy en el modal ${JSON.stringify(details)}`);
     navigation.navigate('Details',{
       details: details
     })
@@ -58,7 +49,6 @@ const HomeScreen = ({ navigation }) => {
       `https://api.rawg.io/api/games/${id}?key=2e821ff3e99346e6869e75fdd124b636`
     );
     const details = detail.data;
-    // console.log(details);
     openModal(details);
   };
 
@@ -125,11 +115,10 @@ const HomeScreen = ({ navigation }) => {
           />
         </View>
       ) : (
-        // <ActivityIndicator size={64} animating={true} />
         <HStack space={2} justifyContent="center">
           <Spinner accessibilityLabel="Loading posts" />
           <Heading color="primary.500" fontSize="lg">
-            Loading
+            Loading...
           </Heading>
         </HStack>
       )}

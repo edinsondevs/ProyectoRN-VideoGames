@@ -9,11 +9,8 @@ import { NativeBaseProvider } from 'native-base';
 import LoginScreen from "../views/LoginScreen";
 import Footer from "../views/Footer";
 import HomeScreen from "../views/HomeScreen";
-// import TodoListScreen from "../views/TodoListScreen";
 import Search from "../views/Search/index.js";
-import Platforms from "../views/Platforms";
 import Details from "../views/Details";
-// import Footer from "../views/Footer";
 
 const Routes = () => {
   const Stack = createNativeStackNavigator();
@@ -23,7 +20,7 @@ const Routes = () => {
       <NativeBaseProvider>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="HomeScreen"
+            initialRouteName="Login"
             screenOptions={{
               headerShown: false,
             }}
@@ -44,11 +41,6 @@ const Routes = () => {
               title="HomeScreen"
             />
             <Stack.Screen
-              name="Platforms"
-              component={Platforms}
-              title="Platforms"
-            />
-            <Stack.Screen
               name="Search"
               component={Search}
               title="Search"
@@ -62,15 +54,3 @@ const Routes = () => {
 };
 
 export default Routes;
-
-// <View style={styles.container}>
-// <View style={{ backgroundColor: "pink", flex: 1 }}/>
-// <HomeScreen />
-// <TodoListScreen />
-// <LoginScreen />
-// </View>
-// <View style={{ backgroundColor: "blue", flex: 1 }} ></View>
-// <Template />
-// <Footer />
-// <StatusBar style="auto" />
-// </View>
