@@ -19,7 +19,6 @@ import {
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../database/config";
-// import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = ({ navigation }) => {
   const app = initializeApp(firebaseConfig);
@@ -27,8 +26,7 @@ const LoginScreen = ({ navigation }) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [newUser, setNewUser] = useState(false);
-  const [errors, setErrors] = useState("");
+  const [errors, setErrors ] = useState("");
 
   const handleUserTextChange = (text) => {
     setEmail(text);
@@ -48,28 +46,6 @@ const LoginScreen = ({ navigation }) => {
     })
   };
 
-const loginGoogle = () => {  
-  // Alert.alert('Falta esta parte de Google')
-  
-  // signInWithPopup(auth, provider)
-  // .then((result) => {
-  //   // This gives you a Google Access Token. You can use it to access the Google API.
-  //   const credential = GoogleAuthProvider.credentialFromResult(result);
-  //   const token = credential.accessToken;
-  //   // The signed-in user info.
-  //   const user = result.user;
-  //   // ...
-  // }).catch((error) => {
-  //   // Handle Errors here.
-  //   const errorCode = error.code;
-  //   const errorMessage = error.message;
-  //   // The email of the user's account used.
-  //   const email = error.customData.email;
-  //   // The AuthCredential type that was used.
-  //   const credential = GoogleAuthProvider.credentialFromError(error);
-  //   // ...
-  // })
-}
 
   const createUser = () => {
     if (validate()) {
@@ -86,29 +62,6 @@ const loginGoogle = () => {
     setEmail("");
     setPassword("");
   };
-  // Con AsyncAwait
-  // const createUser = async () => {
-  //   await createUserWithEmailAndPassword(auth, email, password);
-  //   try {
-  //     const user = userCredential.user;
-  //     console.log(user.username);
-  //   } catch (error) {
-  //     Alert.alert(error.message);
-  //   }
-  //   return Alert.alert("Registro Exitoso",`El usuario ${user.username} fue creado exitosamente`);
-  // };
-
-  // const loginUser = async () => {
-  //   await signInWithEmailAndPassword(auth, email, password);
-  //   try {
-  //     console.log("Usuario logeado");
-  //     const user = userCredential.user;
-  //     console.log(user);
-  //     Alert.alert(user);
-  //   } catch (error) {
-  //     Alert.alert(error.message);
-  //   }
-  // };
 
   const loginUser = () => {
     if (validate()) {
@@ -118,8 +71,7 @@ const loginGoogle = () => {
           navigation.navigate("HomeScreen");
         })
         .catch((error) => {
-          Alert.alert('Error Sign In');
-          // console.log('error sign in');
+          Alert.alert('Incorrect email or password');
         });
     }
     setEmail("");
@@ -132,7 +84,7 @@ const loginGoogle = () => {
       Alert.alert("Invalid Email","Please enter a valid email address.");
       return false;
     }
-    if (password.trim().length <= 6) {
+    if (password.trim().length <= 5) {
       setErrors("Password is too short");
       Alert.alert("Password is too","Please enter a valid password longer than 6 characters.");
       return false;

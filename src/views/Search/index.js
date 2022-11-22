@@ -19,11 +19,18 @@ import {
   Divider,
   Input,
   Icon,
+  FormControl,
 } from "native-base";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
-const Search = ({ navigation }) => {
+const Search = () => {
+  const [game, setGame] = useState("");
   const [data, setData] = useState([]);
+  
+  const handleUserTextChange = (text) => {
+    // setGame(text);
+    console.log(text);
+  };
 
   const getApiPlatforms = async () => {
     const result = await axios.get(
@@ -32,10 +39,20 @@ const Search = ({ navigation }) => {
     const datos = result.data.results;
     setData(datos);
   };
+  
 
   useEffect(() => {
     getApiPlatforms();
   }, []);
+
+
+  const handleOnPress = async (data) => {
+    const searchData = await axios.get(
+      `https://api.rawg.io/api/games/${data}?key=2e821ff3e99346e6869e75fdd124b636`
+    );
+    const result = searchData.data;
+    console.log(result);
+  };
 
   const render = ({ item }) => (
     <Box style={{ marginBottom: 20 }}>
@@ -88,10 +105,11 @@ const Search = ({ navigation }) => {
           </Box>
         }
       >
-        <VStack w="100%"  >
+        <VStack w="100%">
+        <FormControl>
           <Input
             placeholder="Search for video game"
-            width="280%"
+            width="450%"
             borderRadius="4"
             color="gray.400"
             fontSize="14"
@@ -104,16 +122,11 @@ const Search = ({ navigation }) => {
                 as={<MaterialIcons name="search" />}
               />
             }
-            InputRightElement={
-              <Icon
-                m="2"
-                mr="3"
-                size="6"
-                color="gray.400"
-                as={<MaterialIcons name="mic" />}
-              />
-            }
+            onChangeText={handleUserTextChange}
+            value={game}
+            // name="game"
           />
+          </FormControl>
         </VStack>
       </VStack>
     );
@@ -121,7 +134,7 @@ const Search = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView style={styles.headerContainer}>
+      <View style={styles.headerContainer}>
         <View>
           <SearchBar />
         </View>
@@ -133,8 +146,8 @@ const Search = ({ navigation }) => {
             color="#bababa"
           />
         </View>
-      </SafeAreaView>
-      {data.length ? (
+      </View>
+      {data ? (
         <View style={styles.content}>
           <FlatList
             data={data}
@@ -143,11 +156,10 @@ const Search = ({ navigation }) => {
           />
         </View>
       ) : (
-        // <ActivityIndicator size={64} animating={true} />
         <HStack space={2} justifyContent="center">
           <Spinner accessibilityLabel="Loading posts" />
           <Heading color="primary.500" fontSize="lg">
-            Loading
+            Loading...
           </Heading>
         </HStack>
       )}
