@@ -73,11 +73,6 @@ import {
             <ActivityIndicator size={48} />
           )}
         </View>
-        {/* <View style={styles.footer}>
-          <Button title="Bienvenido" onPress={() => getApiAll()}></Button>
-          <Button title="Prueba" onPress={() => HetApihome()}></Button>
-          <Button title="TodoList" onPress={() => navigation.navigate('TodoList')}></Button>
-        </View> */}
         <Footer />
       </SafeAreaView>
     );

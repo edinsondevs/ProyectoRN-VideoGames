@@ -1,4 +1,4 @@
-import { View, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
+import { View, SafeAreaView, FlatList, ActivityIndicator, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import { styles } from "../../styles";
 import { useGet } from "../../Hooks";
@@ -24,6 +24,7 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 const Search = ({ navigation }) => {
   const [data, setData] = useState([]);
+  const [search, setSearch] = useState('')
 
   const getApiPlatforms = async () => {
     const result = await axios.get(
@@ -36,6 +37,17 @@ const Search = ({ navigation }) => {
   useEffect(() => {
     getApiPlatforms();
   }, []);
+
+const handleSearch = (text) => {
+    setSearch(text)
+    // console.log(search);
+}
+
+const handleOnPress = async (data) => {
+  const searchData = await axios.get(`https://api.rawg.io/api/games/${data}?key=2e821ff3e99346e6869e75fdd124b636`)
+  const result = searchData.data
+  console.log(result);
+}
 
   const render = ({ item }) => (
     <Box style={{ marginBottom: 20 }}>
@@ -91,10 +103,11 @@ const Search = ({ navigation }) => {
         <VStack w="100%"  >
           <Input
             placeholder="Search for video game"
-            width="280%"
+            width="450%"
             borderRadius="4"
             color="gray.400"
             fontSize="14"
+            onChangeText={handleSearch}
             InputLeftElement={
               <Icon
                 m="2"
@@ -102,17 +115,10 @@ const Search = ({ navigation }) => {
                 size="6"
                 color="gray.400"
                 as={<MaterialIcons name="search" />}
+                // onPress={() => handleOnPress(search)}
               />
             }
-            InputRightElement={
-              <Icon
-                m="2"
-                mr="3"
-                size="6"
-                color="gray.400"
-                as={<MaterialIcons name="mic" />}
-              />
-            }
+           
           />
         </VStack>
       </VStack>
@@ -121,7 +127,7 @@ const Search = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView style={styles.headerContainer}>
+      <View style={styles.headerContainer}>
         <View>
           <SearchBar />
         </View>
@@ -133,7 +139,7 @@ const Search = ({ navigation }) => {
             color="#bababa"
           />
         </View>
-      </SafeAreaView>
+      </View>
       {data.length ? (
         <View style={styles.content}>
           <FlatList

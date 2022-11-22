@@ -161,5 +161,45 @@ textCardName: {
 textCard: {
   color: "white",
 },
+detailsContainer: {
+  flex: 1,
+  height: 350,
+  marginBottom: 30,
+},
+websiteDetails:{
+  backgroundColor: "#ffffff9f",
+  marginTop: -90,
+  position: "absolute",
+  borderRadius: 5,
+  marginStart: 3,
+  padding: 5
+},
+
+descriptionGame: {
+  paddingStart : 20,
+  paddingEnd: 20,
+},
+
+description: {
+  textAlign: 'justify'
+},
+
+titleDescription:{
+  fontWeight: 'bold',
+  textTransform: 'uppercase',
+  backgroundColor: '#353535',
+  height: 30,
+  color: 'white',
+  textAlign: 'center',
+},
+numberRating: {
+  color: 'red',
+  fontStyle: 'italic',
+  textAlign: 'center',
+},  
+platformsDetails: {
+  // alignItems: 'space-around',
+  alignItems: 'center',
+},
 
 });

@@ -9,9 +9,10 @@ import { NativeBaseProvider } from 'native-base';
 import LoginScreen from "../views/LoginScreen";
 import Footer from "../views/Footer";
 import HomeScreen from "../views/HomeScreen";
-import TodoListScreen from "../views/TodoListScreen";
+// import TodoListScreen from "../views/TodoListScreen";
 import Search from "../views/Search/index.js";
 import Platforms from "../views/Platforms";
+import Details from "../views/Details";
 // import Footer from "../views/Footer";
 
 const Routes = () => {
@@ -32,11 +33,11 @@ const Routes = () => {
               component={LoginScreen}
               title="LoginScreen"
             />
-            <Stack.Screen
-              name="TodoList"
-              component={TodoListScreen}
-              title="TodoList"
-            />
+             <Stack.Screen
+              name="Details"
+              component={Details}
+              title="Details"
+            /> 
             <Stack.Screen
               name="HomeScreen"
               component={HomeScreen}
