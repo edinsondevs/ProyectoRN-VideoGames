@@ -20,7 +20,7 @@ const Routes = () => {
       <NativeBaseProvider>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Login"
+            initialRouteName="Search"
             screenOptions={{
               headerShown: false,
             }}

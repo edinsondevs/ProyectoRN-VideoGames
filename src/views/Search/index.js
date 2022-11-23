@@ -1,10 +1,8 @@
 import { View, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import { styles } from "../../styles";
-import { useGet } from "../../Hooks";
 import axios from "axios";
 import Footer from "../Footer";
-import { getApi } from "../../Functions";
 import {
   Box,
   Heading,
@@ -22,99 +20,98 @@ import {
   FormControl,
 } from "native-base";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import Platforms from './../Platforms/index';
 
 const Search = () => {
-  const [game, setGame] = useState("");
-  const [data, setData] = useState([]);
-  
-  const handleUserTextChange = (text) => {
-    // setGame(text);
-    console.log(text);
+  const [game, setGame] = useState();
+  const [data, setData] = useState();
+
+  const handleTextChange = (text) => {
+    setGame(text);
   };
 
-  const getApiPlatforms = async () => {
+  const handleOnPress = async (params) => {
+    // const handleOnPress = async (data) => {
     const result = await axios.get(
-      "https://api.rawg.io/api/platforms?key=2e821ff3e99346e6869e75fdd124b636"
+      // `https://api.rawg.io/api/games/hitman?key=2e821ff3e99346e6869e75fdd124b636`
+      `https://api.rawg.io/api/games/${params}?key=2e821ff3e99346e6869e75fdd124b636`
     );
-    const datos = result.data.results;
+    const datos = result.data;
+    // console.log(datos.platforms.map(e => e.platform.name));
     setData(datos);
-  };
-  
-
-  useEffect(() => {
-    getApiPlatforms();
-  }, []);
-
-
-  const handleOnPress = async (data) => {
-    const searchData = await axios.get(
-      `https://api.rawg.io/api/games/${data}?key=2e821ff3e99346e6869e75fdd124b636`
-    );
-    const result = searchData.data;
-    console.log(result);
+    setGame('')
   };
 
-  const render = ({ item }) => (
-    <Box style={{ marginBottom: 20 }}>
-      <Box
-        maxW="80"
-        rounded="lg"
-        overflow="hidden"
-        borderColor="coolGray.800"
-        borderWidth="1"
-      >
-        <Box>
-          <AspectRatio w="100%" ratio={9 / 9}>
-            <Image source={{ uri: item?.image_background }} alt="image" />
-          </AspectRatio>
-          <Center
-            bg="dark.200"
-            _text={{
-              color: "warmGray.50",
-              fontWeight: "700",
-              fontSize: "xs",
-            }}
-            position="absolute"
-            bottom="0"
-            px="3"
-            py="1.5"
-            flexDirection={"row"}
-          >
-            {item?.name}
-          </Center>
-        </Box>
-        <Stack p="4" spae={3}>
-          <Stack space={2}>
-            <Heading size="md" ml="-1">
-              {item.name}
-            </Heading>
-          </Stack>
-        </Stack>
-      </Box>
-    </Box>
-  );
+  // useEffect(() => {
+  //   getApiPlatforms();
+  // }, []);
 
-  function SearchBar() {
-    return (
-      <VStack
-        my="1"
-        w="100%"
-        divider={
-          <Box px="2">
-            <Divider />
-          </Box>
-        }
-      >
-        <VStack w="100%">
-        <FormControl>
+  // const handleOnPress = async (data) => {
+  //   const searchData = await axios.get(
+  //     // `https://api.rawg.io/api/games/hitman?key=2e821ff3e99346e6869e75fdd124b636`
+  //     `https://api.rawg.io/api/games/${data}?key=2e821ff3e99346e6869e75fdd124b636`
+  //   );
+  //   const result = searchData.data;
+  //   setGame();
+  //   setGame("");
+  // };
+
+  // const render = ({ item }) => (
+  //   <Box style={{ marginBottom: 20 }}>
+  //     <Box
+  //       maxW="80"
+  //       rounded="lg"
+  //       overflow="hidden"
+  //       borderColor="coolGray.800"
+  //       borderWidth="1"
+  //     >
+  //       <Box>
+  //         <AspectRatio w="100%" ratio={9 / 9}>
+  //           <Image source={{ uri: item?.image_background }} alt="image" />
+  //         </AspectRatio>
+  //         <Center
+  //           bg="dark.200"
+  //           _text={{
+  //             color: "warmGray.50",
+  //             fontWeight: "700",
+  //             fontSize: "xs",
+  //           }}
+  //           position="absolute"
+  //           bottom="0"
+  //           px="3"
+  //           py="1.5"
+  //           flexDirection={"row"}
+  //         >
+  //           {item?.name}
+  //         </Center>
+  //       </Box>
+  //       <Stack p="4" spae={3}>
+  //         <Stack space={2}>
+  //           <Heading size="md" ml="-1">
+  //             {item.name}
+  //           </Heading>
+  //         </Stack>
+  //       </Stack>
+  //     </Box>
+  //   </Box>
+  // );
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.headerContainer}>
+        <View>
           <Input
             placeholder="Search for video game"
             width="450%"
             borderRadius="4"
             color="gray.400"
             fontSize="14"
+            value={game}
+            name="game"
+            onChangeText={handleTextChange}
             InputLeftElement={
               <Icon
+                onPress={() => handleOnPress(game)}
                 m="2"
                 ml="3"
                 size="6"
@@ -122,21 +119,7 @@ const Search = () => {
                 as={<MaterialIcons name="search" />}
               />
             }
-            onChangeText={handleUserTextChange}
-            value={game}
-            // name="game"
           />
-          </FormControl>
-        </VStack>
-      </VStack>
-    );
-  }
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <View>
-          <SearchBar />
         </View>
         <View>
           <Ionicons
@@ -149,11 +132,51 @@ const Search = () => {
       </View>
       {data ? (
         <View style={styles.content}>
-          <FlatList
-            data={data}
-            renderItem={render}
-            style={{ marginLeft: 10, marginRight: 10 }}
-          />
+          <View>
+            <Text>{data.name}</Text>
+          </View>
+          <View>
+            <Box style={{ marginBottom: 20 }}>
+              <Box
+                maxW="80"
+                rounded="lg"
+                overflow="hidden"
+                borderColor="coolGray.800"
+                borderWidth="1"
+              >
+                <Box>
+                  <AspectRatio w="100%" ratio={9 / 9}>
+                    <Image
+                      source={{ uri: data?.background_image }}
+                      alt="image"
+                    />
+                  </AspectRatio>
+                  <Center
+                    bg="dark.200"
+                    _text={{
+                      color: "warmGray.50",
+                      fontWeight: "700",
+                      fontSize: "xs",
+                    }}
+                    position="absolute"
+                    bottom="0"
+                    px="3"
+                    py="1.5"
+                    flexDirection={"row"}
+                  >
+                    {data.platforms.map(e => e.platform.name).join("  ")} 
+                  </Center>
+                </Box>
+                <Stack p="4" spae={3}>
+                  <Stack space={2}>
+                    <Heading size="md" ml="-1">
+                      {data.name}
+                    </Heading>
+                  </Stack>
+                </Stack>
+              </Box>
+            </Box>
+          </View>
         </View>
       ) : (
         <HStack space={2} justifyContent="center">

@@ -44,7 +44,6 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const handleGamerDetail = async (id) => {
-    // Alert.alert(`estoy en el detalle del juego con id ${id}`);
     const detail = await axios.get(
       `https://api.rawg.io/api/games/${id}?key=2e821ff3e99346e6869e75fdd124b636`
     );
@@ -79,7 +78,7 @@ const HomeScreen = ({ navigation }) => {
           <Stack p="4" space={3}>
             <Stack space={2}>
               <Heading size="md" ml="-1">
-                {item.name} {item.id}
+                {item.name} 
               </Heading>
               <Text fontSize="xs" fontWeight="500" ml="-0.5" mt="-1">
                 {item.genres.map((el) => el.name).join(" / ")}
